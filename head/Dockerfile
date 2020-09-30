@@ -4,7 +4,9 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
       build-essential ca-certificates git rsync \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
-RUN git clone https://cm-gitlab.stanford.edu/bil/s7.git --depth 1
+# Debian does not have the certificate; remove GIT_SSL_NO_VERIFY once it does.
+RUN GIT_SSL_NO_VERIFY=yes \
+      git clone https://cm-gitlab.stanford.edu/bil/s7.git --depth 1
 WORKDIR /build/s7
 RUN echo '#define S7_LOAD_PATH "/usr/local/lib/s7"' >mus-config.h
 RUN gcc -o s7 s7.c -ldl -lm -rdynamic -O2 -g -I . -D WITH_MAIN
