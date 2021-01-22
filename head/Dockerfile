@@ -18,7 +18,7 @@ RUN find . -name '*.scm' | rsync -va --files-from - ./ /usr/local/lib/s7/ \
 
 FROM debian:bullseye-slim
 RUN apt-get update && apt-get -y --no-install-recommends install \
-      libnotcurses1 \
+      libnotcurses2 \
  && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/ /usr/local/
 ENV LANG=en_US.UTF-8
