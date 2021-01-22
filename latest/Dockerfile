@@ -5,7 +5,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
 COPY checksum checksum
-ADD https://ccrma.stanford.edu/software/s7/s7-2020-10-13.tar.gz s7.tar.gz
+ADD https://ccrma.stanford.edu/software/s7/s7-01Jan21.tar.gz s7.tar.gz
 RUN sha256sum s7.tar.gz && sha256sum -c checksum
 RUN mkdir s7 && tar -C s7 --strip-components 1 -xf s7.tar.gz
 WORKDIR /build/s7
